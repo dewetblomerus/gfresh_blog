@@ -2,9 +2,15 @@ require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
   let(:post) { FactoryGirl.create(:post) }
-  let(:comment) { FactoryGirl.create(:comment, post: post) }
+  let(:comment) { FactoryGirl.create(:comment, authorable: post) }
 
   it 'is valid with example attributes and a post' do
+    expect(comment.valid?).to eq(true)
+  end
+
+  it 'is valid with example attributes and an article' do
+    article = FactoryGirl.create(:article)
+    comment_on_article = FactoryGirl.create(:comment, authorable: article)
     expect(comment.valid?).to eq(true)
   end
 

@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
-  belongs_to :post
+  belongs_to :authorable, polymorphic: true
 
   validates :user, presence: true
   validates :body, presence: true

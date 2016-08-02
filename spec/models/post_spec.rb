@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   let(:post) { FactoryGirl.create(:post) }
-  let(:comment) { FactoryGirl.create(:comment, post: post) }
+  let(:comment) { FactoryGirl.create(:comment, authorable: post) }
 
   it 'is valid with example attributes' do
     expect(post.valid?).to eq(true)

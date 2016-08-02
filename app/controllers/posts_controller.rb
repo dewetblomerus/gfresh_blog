@@ -14,7 +14,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    @comment = Comment.new(post: @post)
+    @comment = Comment.new(authorable: @post)
   end
 
   private

@@ -18,10 +18,10 @@ class Feed
   end
 
   def ranked_comments_query
-    Comment.where(post_id: @posts.map(&:id)).select(<<-SQL).to_sql
+    Comment.where(authorable_id: @posts.map(&:id)).select(<<-SQL).to_sql
       comments.*,
       dense_rank() OVER (
-	PARTITION BY comments.post_id
+	PARTITION BY comments.authorable_id
 	ORDER BY comments.created_at DESC
       ) AS comment_rank
     SQL
@@ -29,6 +29,6 @@ class Feed
 
 
   def build_comment_cache
-    comments.group_by(&:post_id)
+    comments.group_by(&:authorable_id)
   end
 end
