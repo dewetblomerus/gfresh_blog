@@ -11,7 +11,7 @@ RSpec.describe Comment, type: :model do
   it 'is valid with example attributes and an article' do
     article = FactoryGirl.create(:article)
     comment_on_article = FactoryGirl.create(:comment, authorable: article)
-    expect(comment.valid?).to eq(true)
+    expect(comment_on_article.valid?).to eq(true)
   end
 
   it 'requires a user' do

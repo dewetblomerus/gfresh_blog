@@ -20,10 +20,10 @@ class Feed
   private
 
   def comments
-    Comment.
-      select("*").
-      from(Arel.sql("(#{ranked_comments_query}) AS ranked_comments")).
-      where("comment_rank <= 3")
+    Comment
+      .select('*')
+      .from(Arel.sql("(#{ranked_comments_query}) AS ranked_comments"))
+      .where('comment_rank <= 3')
   end
 
   def ranked_comments_query
@@ -35,7 +35,6 @@ class Feed
       ) AS comment_rank
     SQL
   end
-
 
   def build_comment_cache
     comments.group_by(&:authorable_id)
