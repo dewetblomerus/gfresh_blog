@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 describe 'navigating posts' do
-  let(:post) { FactoryGirl.create(
-    :post,
-    title: "Posts Now Clickable",
-    body: "Do you love my new navigation"
-  ) }
+  let(:post) do
+    FactoryGirl.create(
+      :post,
+      title: 'Posts Now Clickable',
+      body: 'Do you love my new navigation'
+    )
+  end
 
   it 'allows navigaion from the index to the show' do
     post
