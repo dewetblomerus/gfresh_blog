@@ -1,11 +1,20 @@
 class Feed
-  def initialize(posts:)
-    @posts = posts
+  def initialize(authorables: authorables, authorable_type: authorable_type)
+    @authorables = authorables
+    @authorable_type = authorable_type
     @comment_cache = build_comment_cache
   end
 
   def posts
-    @posts.map { |post| PostWithLatestComments.new(post, @comment_cache) }
+    authorables
+  end
+
+  def articles
+    authorables
+  end
+
+  def authorables
+    @authorables.map { |authorable| @authorable_type.new(authorable, @comment_cache) }
   end
 
   private
@@ -18,7 +27,7 @@ class Feed
   end
 
   def ranked_comments_query
-    Comment.where(authorable_id: @posts.map(&:id)).select(<<-SQL).to_sql
+    Comment.where(authorable_id: @authorables.map(&:id)).select(<<-SQL).to_sql
       comments.*,
       dense_rank() OVER (
 	PARTITION BY comments.authorable_id
