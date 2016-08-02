@@ -3,3 +3,12 @@
 <p>
   <%= @post.body %>
 </p>
+
+<h3>Comments</h3>
+<p>
+  <% @post.comments.each do |comment| %>
+    <%= comment.user %>
+    <br>
+    <%= comment.body %>
+  <% end %>
+</p>
