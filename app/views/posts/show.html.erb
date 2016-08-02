@@ -4,11 +4,22 @@
   <%= @post.body %>
 </p>
 
-<h3>Comments</h3>
-<p>
-  <% @post.comments.each do |comment| %>
-    <%= comment.user %>
-    <br>
-    <%= comment.body %>
-  <% end %>
-</p>
+<h3>
+  Comments
+</h3>
+
+<%= form_for [@post, @comment], remote: true do |f| %>
+  <%= f.label :user %>
+  <%= f.text_field :user, :autofocus => true %><br>
+  <%= f.label :body %>
+  <%= f.text_field :body %><br>
+  <%= f.submit %>
+<% end %>
+
+<ul>
+  <section id='comments-section'>
+    <% @post.comments.reverse.each do |comment| %>
+      <%= render comment %>
+    <% end %>
+  </section
+</ul>
