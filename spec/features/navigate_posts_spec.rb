@@ -21,7 +21,7 @@ describe 'navigating posts' do
   it 'allows navigaion from the show to the post' do
     post
     visit post_path(post)
-    click_on('Home')
+    click_on('Posts')
     expect(current_path).to eq(posts_path)
     expect(page).to have_content('Posts Now Clickable')
     expect(page).to have_content('Do you love')
