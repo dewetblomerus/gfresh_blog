@@ -9,12 +9,12 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @feed = Feed.new(articles: Article.all)
+    @feed = Feed.new(authorables: Article.all, authorable_type: ArticleWithLatestComments)
   end
 
   def show
     @article = Article.find(params[:id])
-    @comment = Comment.new(article: @article)
+    @comment = Comment.new(authorable: @article)
   end
 
   private

@@ -1,0 +1,7 @@
+<h1>Articles</h1>
+
+<ul>
+  <% @feed.posts.each do |post| %>
+    <%= render post %>
+  <% end %>
+<ul>

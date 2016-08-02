@@ -1,8 +1,7 @@
 class CommentsController < ApplicationController
   def create
-    @post = Post.find(params[:post_id])
-    @comment = @post.comments.new(comment_params)
-    @comment.post = @post
+    @comment = authorable.comments.new(comment_params)
+    @comment.authorable = authorable
     @comment.save!
 
     respond_to do |format|
@@ -12,6 +11,19 @@ class CommentsController < ApplicationController
   end
 
   private
+
+  def authorable
+    authorable_type.find(authorable_id)
+  end
+
+  def authorable_type
+    Post if params[:post_id]
+    Article if params[:article_id]
+  end
+
+  def authorable_id
+    params[:post_id] || params[:article_id]
+  end
 
   def comment_params
     params.require(:comment).permit(:user, :body)

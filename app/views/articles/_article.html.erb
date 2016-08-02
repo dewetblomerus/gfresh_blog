@@ -1,0 +1,8 @@
+<p>
+  <h3><%= link_to article.title, article %></h3>
+  <%= article.body %>
+  <% article.latest_comments.each do |comment| %>
+    <%= render comment %>
+  <% end %>
+
+</p>

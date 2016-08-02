@@ -23,7 +23,7 @@ RSpec.describe Feed do
 
     # with feed object we make only 2
     expect do
-      feed = Feed.new(posts: Post.all)
+      feed = Feed.new(authorables: Post.all, authorable_type: PostWithLatestComments)
       feed.posts.each do |post|
         post.latest_comments.size
       end

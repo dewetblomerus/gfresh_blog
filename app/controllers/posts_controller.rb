@@ -9,7 +9,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @feed = Feed.new(posts: Post.all)
+    @feed = Feed.new(authorables: Post.all, authorable_type: PostWithLatestComments)
   end
 
   def show
