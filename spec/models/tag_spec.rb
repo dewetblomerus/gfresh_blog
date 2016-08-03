@@ -14,7 +14,7 @@ RSpec.describe Tag, type: :model do
 
   xit 'has taggables through classifications' do
     article = FactoryGirl.create(:article)
-    classification = FactoryGirl.create(:classification, tag: tag, taggable: article)
+    FactoryGirl.create(:classification, tag: tag, taggable: article)
     expect(tag.taggables.last).to eq(article)
   end
 

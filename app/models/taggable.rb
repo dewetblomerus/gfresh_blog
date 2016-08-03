@@ -7,11 +7,11 @@ module Taggable
 
   def build_tags
     tag_strings.each do |tag_string|
-      self.tags.create(title: tag_string)
+      tags.create(title: tag_string)
     end
   end
 
   def tag_strings
-    self.body.scan(/#\w+/)
+    body.scan(/#\w+/)
   end
 end

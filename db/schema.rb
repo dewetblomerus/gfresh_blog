@@ -10,50 +10,49 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160803011624) do
-
+ActiveRecord::Schema.define(version: 20_160_803_011_624) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "articles", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'articles', force: :cascade do |t|
+    t.string   'title'
+    t.text     'body'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "classifications", force: :cascade do |t|
-    t.integer  "tag_id"
-    t.string   "taggable_type"
-    t.integer  "taggable_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
-    t.index ["tag_id"], name: "index_classifications_on_tag_id", using: :btree
-    t.index ["taggable_type", "taggable_id"], name: "index_classifications_on_taggable_type_and_taggable_id", using: :btree
+  create_table 'classifications', force: :cascade do |t|
+    t.integer  'tag_id'
+    t.string   'taggable_type'
+    t.integer  'taggable_id'
+    t.datetime 'created_at',    null: false
+    t.datetime 'updated_at',    null: false
+    t.index ['tag_id'], name: 'index_classifications_on_tag_id', using: :btree
+    t.index %w(taggable_type taggable_id), name: 'index_classifications_on_taggable_type_and_taggable_id', using: :btree
   end
 
-  create_table "comments", force: :cascade do |t|
-    t.string   "user"
-    t.text     "body"
-    t.string   "authorable_type"
-    t.integer  "authorable_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["authorable_type", "authorable_id"], name: "index_comments_on_authorable_type_and_authorable_id", using: :btree
+  create_table 'comments', force: :cascade do |t|
+    t.string   'user'
+    t.text     'body'
+    t.string   'authorable_type'
+    t.integer  'authorable_id'
+    t.datetime 'created_at',      null: false
+    t.datetime 'updated_at',      null: false
+    t.index %w(authorable_type authorable_id), name: 'index_comments_on_authorable_type_and_authorable_id', using: :btree
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string   "title"
-    t.text     "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'posts', force: :cascade do |t|
+    t.string   'title'
+    t.text     'body'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "tags", force: :cascade do |t|
-    t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'tags', force: :cascade do |t|
+    t.string   'title'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  add_foreign_key "classifications", "tags"
+  add_foreign_key 'classifications', 'tags'
 end
