@@ -3,7 +3,6 @@ module Authorable
   included do
     has_many :comments, as: :authorable, dependent: :delete_all
 
-    validates :title, presence: true
-    validates :body, presence: true
+    validates_presence_of :title, :body
   end
 end

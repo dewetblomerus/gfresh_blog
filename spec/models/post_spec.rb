@@ -30,4 +30,26 @@ RSpec.describe Post, type: :model do
       expect { Comment.find(comment.id) }.to raise_error error
     end
   end
+
+  describe 'when i delete the comment' do
+    it 'then the post should still exist' do
+      comment
+      posts_count = Post.all.count
+      comment.destroy
+      expect posts_count != Post.all.count
+      error = "Couldn't find Post with 'id'=#{post.id}"
+      expect { Post.find(post.id) }.not_to raise_error
+    end
+  end
+
+  describe 'when i delete the post' do
+    xit 'then the classificaiton should no longer exist' do
+      FactoryGirl.create(:classification, classifiable: post)
+      classifiables_count = Classifiable.all.count
+      post.destroy
+      expect classifiables_count != Classifiable.all.count
+      error = "Couldn't find Classifiable with 'id'=#{comment.id}"
+      expect { Classifiable.find(comment.id) }.to raise_error error
+    end
+  end
 end
