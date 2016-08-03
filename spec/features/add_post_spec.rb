@@ -18,7 +18,7 @@ RSpec.describe 'adding posts' do
     fill_in 'Title', with: 'My First Post'
     fill_in 'Body', with: '#am totally #tagging every #this bit of this #up'
     click_on('Create Post')
-    visit posts_path
+    click_on('My First Post')
     expect(page).to have_content('#am #tagging #this')
   end
 end

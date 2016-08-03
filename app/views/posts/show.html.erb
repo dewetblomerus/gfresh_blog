@@ -4,6 +4,13 @@
   <%= @post.body %>
 </p>
 
+<p>
+  Tags:
+  <% @post.tags.each do |tag| %>
+    <%= tag.title %>
+  <% end %>
+</p>
+
 <h3>
   Comments
 </h3>
