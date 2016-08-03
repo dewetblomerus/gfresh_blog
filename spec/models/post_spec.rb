@@ -26,6 +26,14 @@ RSpec.describe Post, type: :model do
     expect(post.tags.last).to eq(tag)
   end
 
+  it 'parses tags from body' do
+    post = FactoryGirl.create(
+      :post,
+      body: "I am #codinglate on my #mechanicalkeyboard"
+    )
+    expect(post.tags.size).to eq(2)
+  end
+
   describe 'when i delete the post' do
     it 'then the comment should no longer exist' do
       comment
