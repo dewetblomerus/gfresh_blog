@@ -20,6 +20,12 @@ RSpec.describe Post, type: :model do
     expect(post.errors[:body].any?).to eq(true)
   end
 
+  it 'has tags through classifications' do
+    tag = FactoryGirl.create(:tag)
+    classification = FactoryGirl.create(:classification, tag: tag, taggable: post)
+    expect(post.tags.last).to eq(tag)
+  end
+
   describe 'when i delete the post' do
     it 'then the comment should no longer exist' do
       comment
@@ -43,13 +49,14 @@ RSpec.describe Post, type: :model do
   end
 
   describe 'when i delete the post' do
-    xit 'then the classificaiton should no longer exist' do
-      FactoryGirl.create(:classification, classifiable: post)
-      classifiables_count = Classifiable.all.count
+    it 'then the classificaiton should no longer exist' do
+      tag = FactoryGirl.create(:tag)
+      classification = FactoryGirl.create(:classification, tag: tag, taggable: post)
+      classification_count = Classification.all.count
       post.destroy
-      expect classifiables_count != Classifiable.all.count
-      error = "Couldn't find Classifiable with 'id'=#{comment.id}"
-      expect { Classifiable.find(comment.id) }.to raise_error error
+      expect classification_count != Classification.all.count
+      error = "Couldn't find Classification with 'id'=#{classification.id}"
+      expect { Classification.find(classification.id) }.to raise_error error
     end
   end
 end
